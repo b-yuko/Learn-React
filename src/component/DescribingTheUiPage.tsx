@@ -1,4 +1,4 @@
-import "../css/DescribingTheUiPage.css"
+import "../css/DescribingTheUiPage.css";
 
 function Profile() {
   return <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />;
@@ -6,11 +6,11 @@ function Profile() {
 
 export default function Gallery() {
   return (
-      <section>
-        <h1>Amazing scientists</h1>
-        <Profile />
-        <Profile />
-        <Profile />
-      </section>
+    <section>
+      <h1>Amazing scientists</h1>
+      <Profile />
+      <Profile />
+      <Profile />
+    </section>
   );
 }

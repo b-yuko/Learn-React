@@ -1,27 +1,29 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-import "../css/ManagingStatePage.css"
+import { ChangeEvent, FormEvent, useState } from "react";
+import "../css/ManagingStatePage.css";
 
 interface ErrorType {
-  message: string
+  message: string;
 }
 
 export default function Form() {
-  const [answer, setAnswer] = useState<string>('');
+  const [answer, setAnswer] = useState<string>("");
   const [error, setError] = useState<ErrorType | null>(null);
-  const [status, setStatus] = useState<'typing' | 'submitting' | 'success'>('typing');
+  const [status, setStatus] = useState<"typing" | "submitting" | "success">(
+    "typing",
+  );
 
-  if (status === 'success') {
-    return <h1>That's right!</h1>
+  if (status === "success") {
+    return <h1>That's right!</h1>;
   }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus('submitting');
+    setStatus("submitting");
     try {
       await submitForm(answer);
-      setStatus('success');
+      setStatus("success");
     } catch (err) {
-      setStatus('typing');
+      setStatus("typing");
       setError(err as ErrorType);
     }
   }
@@ -40,32 +42,25 @@ export default function Form() {
         <textarea
           value={answer}
           onChange={handleTextareaChange}
-          disabled={status === 'submitting'}
+          disabled={status === "submitting"}
         />
         <br />
-        <button disabled={
-          answer.length === 0 ||
-          status === 'submitting'
-        }>
+        <button disabled={answer.length === 0 || status === "submitting"}>
           Submit
         </button>
-        {error !== null &&
-            <p className="Error">
-              {error.message}
-            </p>
-        }
+        {error !== null && <p className="Error">{error.message}</p>}
       </form>
     </>
   );
 }
 
-function submitForm(answer: string):Promise<void> {
+function submitForm(answer: string): Promise<void> {
   // Pretend it's hitting the network.
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      let shouldError = answer.toLowerCase() !== 'lima'
+      const shouldError = answer.toLowerCase() !== "lima";
       if (shouldError) {
-        reject(new Error('Good guess but a wrong answer. Try again!'));
+        reject(new Error("Good guess but a wrong answer. Try again!"));
       } else {
         resolve();
       }
